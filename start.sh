@@ -38,11 +38,6 @@ app_ip=$(echo $outputs | jq -r '.Outputs[] | select(.OutputKey == "PublicIPApp")
 latency_ip=$(echo $outputs | jq -r '.Outputs[] | select(.OutputKey == "PublicIPLatency") | .OutputValue')
 db_ip=$(echo $outputs | jq -r '.Outputs[] | select(.OutputKey == "PublicIPDB") | .OutputValue')
 
-
-## Latency
-wait_initialized $latency_ip $User $Key
-start_docker_image $latency_ip "node" $User $Key
-
 ## App
 wait_initialized $app_ip $User $Key
 start_docker_image $app_ip $case $User $Key

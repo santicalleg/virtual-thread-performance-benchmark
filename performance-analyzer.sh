@@ -23,7 +23,7 @@ for FILE in test/performance-analyzer/*; do
     command="docker restart \$(docker ps -a -q)"
     execute_remote_command "$command" "$app_ip" "$User" "$Key" > /dev/tty
 
-    wait_http "http://$app_ip:8080/"
+    wait_http "http://$app_ip:8080/health"
 
     cp $FILE ".tmp/scenarios/$case-$name_file"
     sed -i -e "s/_IP_/$app_private_ip/g" ".tmp/scenarios/$case-$name_file"
